@@ -30,21 +30,19 @@ jobs:
           for path in Path("dist").glob("*.svg"):
               svg = path.read_text()
 
-              svg = re.sub(
-                  r'<rect\b[^>]*class="u [^"]*"[^>]*/>',
-                  '',
-                  svg
-              )
+              def remove_bottom_rect(match):
+                  tag = match.group(0)
+
+                  y = re.search(r'y="([\d.]+)"', tag)
+
+                  if y and float(y.group(1)) > 120:
+                      return ''
+
+                  return tag
 
               svg = re.sub(
-                  r'\.u\{[^}]*\}',
-                  '',
-                  svg
-              )
-
-              svg = re.sub(
-                  r'\.u\.u[0-9a-z]+\{[^}]*\}',
-                  '',
+                  r'<rect\b[^>]*/>',
+                  remove_bottom_rect,
                   svg
               )
 
