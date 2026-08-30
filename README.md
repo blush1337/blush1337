@@ -2,7 +2,7 @@
 
 # blushy
 
-<sub>i make random things sometimes.</sub>
+i make random things sometimes.
 
 <br>
 
