@@ -35,6 +35,4 @@ random python project
 
 <div align="center">
 
-<sub>blush1337</sub>
-
 </div>
