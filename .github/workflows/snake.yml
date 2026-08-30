@@ -21,6 +21,32 @@ jobs:
             dist/github-contribution-grid-snake.svg?color_snake=#ff9ecf
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark&color_snake=#ff9ecf
 
+      - name: Crop progress bar
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          for path in Path("dist").glob("*.svg"):
+              svg = path.read_text()
+
+              match = re.search(
+                  r'viewBox="([\d.\-]+) ([\d.\-]+) ([\d.\-]+) ([\d.\-]+)"',
+                  svg
+              )
+
+              if match:
+                  x, y, width, height = map(float, match.groups())
+
+                  svg = svg.replace(
+                      match.group(0),
+                      f'viewBox="{x:g} {y:g} {width:g} 112"'
+                  )
+
+              path.write_text(svg)
+
+          PY
+
       - name: Push snake to output branch
         uses: crazy-max/ghaction-github-pages@v4
         with:
