@@ -2,8 +2,6 @@
 
 # blushy
 
-i make random things sometimes.
-
 <br>
 
 [![Python](https://img.shields.io/badge/python-111111?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
